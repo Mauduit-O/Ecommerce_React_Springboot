@@ -16,8 +16,16 @@ import iconMenu  from '../../assets/icon/menu.svg';
 import iconMore from '../../assets/icon/more.svg';
 import * as Styled from './StyledHeader';
 import { NavLink } from "react-router-dom";
+import ModalMenu from '../modalMenu/Modal';
+import { useState } from "react";
 
 export default function PrimarySearchAppBar() {
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
@@ -110,6 +118,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
+        <ModalMenu modalT={modal} setModalT={setModal} />
       <Styled.ContainerAppBar>
         <AppBar className='container-header'>
           <Toolbar>
@@ -121,7 +130,7 @@ export default function PrimarySearchAppBar() {
                 aria-label="open drawer"
                 sx={{ mr: 2 }}
               >
-                <Styled.Img src={iconMenu} alt="icon menu" />
+                <Styled.Img src={iconMenu} alt="icon menu" onClick={toggleModal}/>
               </IconButton>
               <NavLink to="/"><Styled.Logo src={logo} alt="logo HarleyD" /></NavLink>
               <Styled.Search className='container-search'>
