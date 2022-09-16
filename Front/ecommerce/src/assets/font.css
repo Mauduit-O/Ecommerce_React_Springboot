@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'AvenirLight';
+  src: url('./fonts/Avenir\ Light.ttf');
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: 'AvenirRoman';
+  src: url('./fonts/AvenirLTStd-Roman.otf');
+}
+
+@font-face {
+  font-weight: normal;
+  font-family: 'AvenirBook';
+  src: url('./fonts/AvenirLTStd-Book.otf');
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: 'AvenirMedium';
+  src: url('./fonts/Avenir\ Medium.ttf');
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: 'AvenirBold';
+  src: url('./fonts/Aver\ Bold.ttf');
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: 'AvenirHeavy';
+  src: url('./fonts/Avenir\ Heavy.ttf');
+}
+
+@font-face {
+  font-family: 'AvenirBlack';
+  src: url('./fonts/AvenirLTStd-Black.otf');
+}
+
