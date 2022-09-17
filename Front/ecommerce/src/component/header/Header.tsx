@@ -102,7 +102,7 @@ export default function PrimarySearchAppBar() {
           color="inherit"
         >
           <Badge badgeContent={2} color="error">
-            <Styled.Img src={iconBasket} alt="icon panier" />
+            <Styled.Img src={iconBasket} alt="icon panier" onClick={toggleModal}/>
           </Badge>
         </IconButton>
         <p>Panier</p>
@@ -176,7 +176,7 @@ export default function PrimarySearchAppBar() {
                   <Styled.Img src={iconBasket} alt="icon panier" />
                 </Badge>
               </IconButton>
-              <Modal modalT={modal} UpdateSetModal={setModal} className='reverse'>
+              <Modal modalT={modal} UpdateSetModal={setModal} className='reverse' title='Panier'>
                 <Panier></Panier>
               </Modal>
             </Box>

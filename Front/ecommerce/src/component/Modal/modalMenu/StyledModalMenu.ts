@@ -18,6 +18,7 @@ export const ContentModal = styled.div `
   width: 100vw;
   height: 100vh;
   background: white;
+  position: relative;
 
   @media (min-width: 800px) {
     width: 42vw ;
@@ -30,10 +31,12 @@ export const ContentModal = styled.div `
 export const ModalTop = styled.div `
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-direction: row-reverse;
   padding: 0 6%;  
   height: 8vh;
 	border-bottom: 1px solid #ECECEC;
+  color: black;
 `
 export const IconClose = styled.img `
   width: 15px;
@@ -76,3 +79,36 @@ height: 55vh;
 		justify-content: space-evenly;
   }
 `
+
+export const TitleModal = styled.div `
+  font-size: 16px;
+  font-family: "Avenir-heavy"
+  color: black;
+  letter-spacing: 1.5px;
+
+  @media(min-width: 604px) {
+      font-size: 18px;
+  }
+` 
+
+// .container-modal-panier-top h1{
+
+// }
+
+
+// }
+
+// .container-modal-panier-top a {
+// 	font-size: 12px;
+// 	cursor: pointer;
+// }
+
+//  @media screen and (min-width: 604px) 
+// {
+// 	.container-modal-panier-top a{
+// 		font-size: 14px;
+// 	}
+// }
+
+// .container-modal-panier-top a:hover {
+// 	text-decoration: underline !important;
