@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Btn = styled.button<{ 
   variant: 'primary' | 'secondary'; 
 }>`
-position: relative;
-overflow: hidden;
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
   border-radius: 8px;
   background: black;

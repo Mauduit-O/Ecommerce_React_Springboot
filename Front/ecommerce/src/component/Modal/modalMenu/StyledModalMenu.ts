@@ -8,6 +8,11 @@ export const Overlay = styled.div `
   right: 0;
   bottom: 0;
   background: rgba(49,49,49,0.8);
+
+  &.reverse {
+    display: flex;
+    flex-direction: row-reverse;
+  }
 `
 export const ContentModal = styled.div `
   width: 100vw;
