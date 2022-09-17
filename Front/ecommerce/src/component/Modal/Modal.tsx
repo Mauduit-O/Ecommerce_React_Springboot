@@ -8,16 +8,15 @@ interface ModalProps {
   modalT: boolean;
   UpdateSetModal?: any;
   children?: ReactNode;
+  title?: string;
 }
 
 export default function Modal(props: ModalProps): JSX.Element {
-  const {className, modalT, UpdateSetModal, children} = props;
+  const {className, modalT, UpdateSetModal, children, title} = props;
  
   const toggleModal = () => {
     UpdateSetModal(!modalT);
   };
-
-
 
   return (
     <>
@@ -26,6 +25,7 @@ export default function Modal(props: ModalProps): JSX.Element {
           <Styled.ContentModal>
             <Styled.ModalTop>
               <Styled.IconClose src={IconClose} alt="Icon close" onClick={toggleModal}/>
+              <Styled.TitleModal>{title}</Styled.TitleModal>
             </Styled.ModalTop>
             {children}
           </Styled.ContentModal>
