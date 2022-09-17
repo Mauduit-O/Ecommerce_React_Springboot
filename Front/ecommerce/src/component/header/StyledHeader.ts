@@ -23,7 +23,6 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
@@ -35,7 +34,8 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export const Logo = styled('img')(({ theme }) => ({
   width: '130px',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  transform: 'translate(0px, 10px)'
 }));
 
 export const Img = styled('img')(({ theme }) => ({

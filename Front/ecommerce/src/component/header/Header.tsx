@@ -118,19 +118,20 @@ export default function PrimarySearchAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-        <ModalMenu modalT={modal} setModalT={setModal} />
+        <ModalMenu modalT={modal} ModifsetModalT={setModal} />
+        {/* <ModalMenu modalT={modal} setModalT={setModal} /> */}
       <Styled.ContainerAppBar>
         <AppBar className='container-header'>
           <Toolbar>
             <Styled.ContentNav>
-              <IconButton
+              <IconButton onClick={toggleModal}
                 size="large"
                 edge="start"
                 color="inherit"
                 aria-label="open drawer"
                 sx={{ mr: 2 }}
               >
-                <Styled.Img src={iconMenu} alt="icon menu" onClick={toggleModal}/>
+                <Styled.Img src={iconMenu} alt="icon menu"/>
               </IconButton>
               <NavLink to="/"><Styled.Logo src={logo} alt="logo HarleyD" /></NavLink>
               <Styled.Search className='container-search'>
