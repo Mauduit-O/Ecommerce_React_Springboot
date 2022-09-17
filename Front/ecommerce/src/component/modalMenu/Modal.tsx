@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import InfosUser from "./InfosUser";
 import * as Styled from './StyledModalMenu';
 import IconClose from '../../assets/icon/close.svg'
 
 interface ModalProps {
   modalT: boolean;
-  setModalT?: false;
+  // setModalT?: false;
+  ModifsetModalT: any;
 }
 
 export default function ModalMenu(props: ModalProps): JSX.Element {
-  const {modalT, setModalT} = props;
-
+  const {modalT, ModifsetModalT} = props;
+ 
   const toggleModal = () => {
-    {setModalT}(!modalT);
+    // {setModalT}(!modalT);
+    ModifsetModalT(!modalT);
   };
 
   return (
@@ -21,7 +23,7 @@ export default function ModalMenu(props: ModalProps): JSX.Element {
         <Styled.Overlay>
           <Styled.ContentModal>
             <Styled.ModalTop>
-              <Styled.IconClose src={IconClose} alt="Icon close" onClick={toggleModal} />
+              <Styled.IconClose src={IconClose} alt="Icon close" onClick={toggleModal}/>
             </Styled.ModalTop>
             <Styled.Menu >
               <Styled.ContentMenu>
