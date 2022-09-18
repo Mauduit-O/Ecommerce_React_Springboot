@@ -7,6 +7,7 @@ import Home from './pages/home/Home';
 import Profile from './component/profile/Profile';
 import PrimarySearchAppBar from './component/header/Header';
 import Footer from './component/footer/Footer';
+import ProductsPage from './pages/productsPage/ProductsPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <PrimarySearchAppBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/products" element={<ProductsPage />} />
         <Route path="/profil/:id" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
