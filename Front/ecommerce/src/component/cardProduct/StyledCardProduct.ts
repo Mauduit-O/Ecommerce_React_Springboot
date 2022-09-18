@@ -19,10 +19,12 @@ export const CardProduct = styled.div`
     margin-bottom: 1%;
     padding: 3% 3%;	
     margin-right: 1%;
+
+    &:nth-child(3n) {
+      margin-right: -2%;
+    }
   }
-  &:nth-child(3n) {
-    margin-right: -2%;
-  }
+
 `
 // .container-card-produit {
 
