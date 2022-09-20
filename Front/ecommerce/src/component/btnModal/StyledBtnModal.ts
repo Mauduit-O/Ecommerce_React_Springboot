@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
-export const BtnBasket = styled.div`
-  width: 92vw;
+export const BtnForm = styled.button`
+  width: 100%;
+  // width: 92vw;
   border-radius: 2px;
   height: 5vh;
   cursor: pointer;
@@ -11,11 +12,12 @@ export const BtnBasket = styled.div`
   margin: 2% 4%;
   position: relative;
   overflow: hidden;	
-  
+
   &.btnDark {
     border: none;
     background: black;
     color: white;
+
     &:after  {
       content: "";
       position: absolute;

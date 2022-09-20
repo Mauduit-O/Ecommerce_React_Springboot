@@ -33,25 +33,6 @@ export const ContainerBtn = styled.div`
   justify-content: center;	
 `
 
-//top
-
-// .modal-header-panier {
-// 	border-bottom: none;
-// }
-
-// .modal-panier-body {
-// 	padding: 0;
-// }
-
-// .container-modal-panier-top {
-//     display: flex;
-//     justify-content: space-between;	
-//    	margin-top: 4%;
-//   	padding: 0 4%;
-//    	border-bottom: 1px solid black;
-// }
-
-
 
 
 

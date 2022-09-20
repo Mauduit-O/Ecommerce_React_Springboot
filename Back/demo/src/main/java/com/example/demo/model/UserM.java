@@ -7,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -30,7 +28,6 @@ public class UserM {
 	@Length(min = 2, max = 50)
 	private String firstname;
 	
-	@Temporal(TemporalType.DATE)
 	@NotNull(message = "Date may not be null")
 	private Date date_register;
 	
@@ -54,15 +51,17 @@ public class UserM {
 	@Length(min = 10, max = 10)
 	private String phone;
 	
+
+	
 	@NotNull(message = "Email may not be null")
-	@Pattern(regexp = "/^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$/", 
+	@Pattern(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$", 
     message = "Invalid Password pattern. Password must contain 8 to 20 characters at least one digit, lower, upper case and one special character."
     )
 	@Length(min =7, max = 100)
 	private String email;
 	
 	@NotNull(message = "Lastname may not be null")
-	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,5000}$", 
+	@Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;.',?/*~$^+=<>]).{8,5000}$", 
     message = "Invalid Password pattern. Password must contain 8 to 5000 characters at least one digit, lower, upper case and one special character."
     )
 	@Length(min = 8, max = 5000)
@@ -70,6 +69,7 @@ public class UserM {
 
 
 	public UserM() {
+		this.date_register = new Date();
 	}
 
 

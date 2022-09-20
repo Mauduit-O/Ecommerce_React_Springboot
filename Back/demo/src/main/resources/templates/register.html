@@ -31,43 +31,44 @@
 
 <div class="container">
 	
-	<form method="POST" th:object="${user}">
-<!-- 	  <div class="mb-3"> -->
-<!-- 	    <label for="exampleInputEmail1" class="form-label">Nom </label> -->
-<!-- 	    <input type="text" class="form-control"	th:field="*{lastname}"> -->
-<!-- 	  </div> -->
-<!-- 	  <div class="mb-3"> -->
-<!-- 	    <label for="exampleInputEmail1" class="form-label">prenom </label> -->
-<!-- 	    <input type="text" class="form-control" th:field="*{firstname}"> -->
-<!-- 	  </div> -->
-<!-- 	  <div class="mb-3"> -->
-<!-- 	    <label for="exampleInputEmail1" class="form-label">Email </label> -->
-<!-- 	    <input type="text" class="form-control" th:field="*{email}"> -->
-<!-- 	  </div> -->
-<!-- 	  <div class="mb-3"> -->
-<!-- 	    <label for="exampleInputEmail1" class="form-label">street </label> -->
-<!-- 	    <input type="text" class="form-control" th:field="*{street}"> -->
-<!-- 	  </div> -->
-<!-- 	   <div class="mb-3"> -->
-<!-- 	    <label for="exampleInputEmail1" class="form-label">city </label> -->
-<!-- 	    <input type="text" class="form-control" th:field="*{city}"> -->
-<!-- 	  </div> -->
-<!-- 	   <div class="mb-3"> -->
-<!-- 	    <label for="exampleInputEmail1" class="form-label">Postal code </label> -->
-<!-- 	    <input type="text" class="form-control" th:field="*{postal_code}"> -->
-<!-- 	  </div> -->
-<!-- 	   <div class="mb-3"> -->
-<!-- 	    <label for="exampleInputEmail1" class="form-label">Country </label> -->
-<!-- 	    <input type="text" class="form-control" th:field="*{country}"> -->
-<!-- 	  </div> -->
-<!-- 	   <div class="mb-3"> -->
-<!-- 	    <label for="exampleInputEmail1" class="form-label">phone </label> -->
-<!-- 	    <input type="text" class="form-control" th:field="*{phone}"> -->
-<!-- 	  </div> -->
-<!-- 	  <div class="mb-3"> -->
-<!-- 	    <label for="exampleInputEmail1" class="form-label">Mot de passe </label> -->
-<!-- 	    <input type="password" class="form-control" th:field="*{password}"> -->
-<!-- 	  </div> -->
+	<form method="POST" th:object="${userM}">
+	  <div class="mb-3">
+	    <label for="exampleInputEmail1" class="form-label">Nom </label>
+	    <input type="text" class="form-control"	th:field="*{lastname}">
+	  </div>
+	  <div class="mb-3">
+	    <label for="exampleInputEmail1" class="form-label">prenom </label>
+	    <input type="text" class="form-control" th:field="*{firstname}">
+	  </div>
+	  <div class="mb-3">
+	    <label for="exampleInputEmail1" class="form-label">Email </label>
+	    <input type="text" class="form-control" th:field="*{email}">
+	  </div>
+	  <div class="mb-3">
+	    <label for="exampleInputEmail1" class="form-label">street </label>
+	    <input type="text" class="form-control" th:field="*{street}">
+	  </div>
+	   <div class="mb-3">
+	    <label for="exampleInputEmail1" class="form-label">city </label>
+	    <input type="text" class="form-control" th:field="*{city}">
+	  </div>
+	   <div class="mb-3">
+	    <label for="exampleInputEmail1" class="form-label">Postal code </label>
+	    <input type="text" class="form-control" th:field="*{postal_code}">
+	  </div>
+	   <div class="mb-3">
+	    <label for="exampleInputEmail1" class="form-label">Country </label>
+	    <input type="text" class="form-control" th:field="*{country}">
+	  </div>
+	   <div class="mb-3">
+	    <label for="exampleInputEmail1" class="form-label">phone </label>
+	    <input type="text" class="form-control" th:field="*{phone}">
+	  </div>
+	  <div class="mb-3">
+	    <label for="exampleInputEmail1" class="form-label">Mot de passe </label>
+	    <input type="password" class="form-control" th:field="*{password}">
+	    	<span th:if = "${#fields.hasErrors('password')}" th:errors="*{password}" ></span>
+	  </div>
 	  
 	  <button type="submit" class="btn btn-primary">Submit</button>
 	</form>

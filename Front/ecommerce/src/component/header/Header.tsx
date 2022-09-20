@@ -16,9 +16,8 @@ import * as Styled from './StyledHeader';
 import { NavLink } from "react-router-dom";
 import Modal from '../Modal/Modal';
 import { useState } from "react";
-import MenuM from '../Modal/modalMenu/Menu';
+// import MenuM from '../Modal/modalMenu/Menu';
 import Panier from '../Modal/modalPanier/Panier';
-
 
 
 export default function PrimarySearchAppBar() {

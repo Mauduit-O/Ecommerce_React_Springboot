@@ -17,7 +17,7 @@ function App() {
       <PrimarySearchAppBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/profil/:id" element={<Profile />} />
