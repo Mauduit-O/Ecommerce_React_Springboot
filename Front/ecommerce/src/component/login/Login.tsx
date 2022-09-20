@@ -1,28 +1,56 @@
+import React, {useState} from 'react';
+import * as Styled from './StyledLogin'
+import BtnModal from "../btnModal/BtnModal";
+import Input from "../input/Input";
+import ModalForm from "../modalForm/ModalForm";
+
 export default function Login() {
+  const [email , setEmail] = useState('');
+  const [password , setPassword] = useState('');
+ 
+  
+  const handleEmailChange =(e: React.ChangeEvent<HTMLInputElement>)=>{
+    let regexMail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    setEmail(e.target.value); 
+    // return (e.target.value).match(regexMail) ? (alert("bon"),  setEmail(e.target.value) ): alert("pas");
+    // if(!(e.target.value).match(regexMail)) {
+    //   alert("pas");
+    // } else {
+    //   alert("bon");
+    // }
+    // e.preventDefault();
+  }
+
+  const handlePasswordChange =(e: React.ChangeEvent<HTMLInputElement>)=>{
+    console.log(e.target.value)
+    setPassword(e.target.value);
+  }
+
+  const handleSubmite=(e: React.FormEvent<HTMLFormElement>)=>{
+    // if(password)
+    // {
+    //   const pwdDif ="Les mots de passe ne sont pas identique";
+    //   alert("Les mots de passe ne sont pas identique");
+    // }
+    // else{
+    //   // display alert box with user
+    //   // 'name' and 'email' details .
+      alert('Bienvenue chez HarleyD');
+      console.log("ds le submit")
+    // }
+    // e.preventDefault();
+  }
+
   return (
-    <div className="background-modal-connexion">
-      <div className="container-modal-connexion">
-        <div className="container-icon-close-connexion">
-          <img className="icon-close" alt="Icon fermer" src="assets/icon/close.svg" />
-        </div>
-        <div className="content-modal-connexion">
-          <form method="post">
-            <div className="container-connexion">
-              <h1 className="title-modal-connexion">Connexion</h1>
-              <div className="container-input-modal-connexion container-input-modal-connexion1">
-                  <div><input type="text" id="email" name="email" value="" placeholder="Email *" /></div>
-              </div>
-              <div className=" container-input-modal-connexion container-input-modal-connexion2">
-                  <div><input className="pwd" type="password" id="password" name="password" placeholder="Mot de passe *" /></div>
-              </div>
-              <div className="container-btn-modal-connexion">
-                <button name="btnConnexion" className="btn-modal-connexion" >Se connecter</button>
-                <div className="container-alerty-co"><p className="alerty-co"></p></div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-  </div>
+    <ModalForm titleForm={"Connexion"}>
+        <form method="post" onSubmit={(e) => {handleSubmite(e)}}>
+        <Styled.ContainerInput>
+          <Input type={"text"} name={"email"} value={email} placeholder={"Email"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {handleEmailChange(e)}}></Input>
+          <Input type={"password"} name={"password"} value={password} placeholder={"Mot de passe"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}></Input>
+          <BtnModal type={"submit"} name="BtnLogin" text={"Se connecter"} className={"btnDark" }></BtnModal>
+        </Styled.ContainerInput>
+        </form>
+    </ModalForm>
   )
 }
+

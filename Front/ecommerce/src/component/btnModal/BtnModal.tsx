@@ -3,12 +3,15 @@ import * as Styled from './StyledBtnModal'
 interface BtnModalProps {
   className?: string;
   text: string;
+  type?: string;
+  // value?: string;
+  name?: string;
 }
 export default function StyledBtnModal(props: BtnModalProps): JSX.Element {
-  const {className, text} = props
+  const {className, text, type, name} = props
   return (
-    <Styled.BtnBasket className={className}>
+    <Styled.BtnForm className={className}>
       <Styled.SpanBtn>{text}</Styled.SpanBtn>
-    </Styled.BtnBasket>
+    </Styled.BtnForm>
   )
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +23,11 @@ public class User {
 	@GetMapping("/register")
 	private String userShow( UserM user, Model model, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
+			bindingResult.addError(new FieldError("user", "password", "mot de passe"));
 			return "register";
 		}
+		
+
 
 		List<UserM> users = userRepository.findAll();
 		model.addAttribute("users", users);
@@ -43,4 +47,22 @@ public class User {
 		
 		return "register";
 	}
+	
+	
+	
+	
+//	@PostMapping("/")
+//	public String postHome(@Valid @ModelAttribute("user") UserM user, BindingResult bindingResult) {
+//		System.out.println(bindingResult.hasErrors());
+////		System.out.println(user.getEmail());
+//		if(bindingResult.hasErrors()) {
+//			return "home";
+//		}
+//		
+//
+//		userRepository.save(user);
+//
+//		
+//		return "home";
+//	}
 }

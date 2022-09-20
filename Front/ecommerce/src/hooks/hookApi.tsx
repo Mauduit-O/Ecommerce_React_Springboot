@@ -10,13 +10,7 @@ export default function ApiCategory(props: PathProps): JSX.Element {
   const {path} = props;
   const [data, setData] = useState<any>([]);
 
-  // axios.get<Category[]>('/home', {
-  //   baseURL : 'http://localhost:8082',
-  // }).then( response => {
-  //   console.log(response.data);
-  //   console.log(response.status);
-  // })
-
+  
   const fetchData = async () => {
     await axios 
     .get<PathProps[]>('/category', {
@@ -51,7 +45,7 @@ export default function ApiCategory(props: PathProps): JSX.Element {
 
   // console.log(data)
   
-  return (
+  return  (
   <Fragment>
     <ul>
       {data.map((item:any )=>(
