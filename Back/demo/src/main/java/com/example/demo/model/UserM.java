@@ -50,9 +50,7 @@ public class UserM {
 	@NotNull(message = "Phone may not be null")
 	@Length(min = 10, max = 10)
 	private String phone;
-	
 
-	
 	@NotNull(message = "Email may not be null")
 	@Pattern(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$", 
     message = "Invalid Password pattern. Password must contain 8 to 20 characters at least one digit, lower, upper case and one special character."

@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.model.UserM;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.UserRegisterService;
 
 @Controller
 public class User {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UserRegisterService userRegisterService;
 	
 	@GetMapping("/register")
 	private String userShow( UserM user, Model model, BindingResult bindingResult) {
@@ -43,8 +47,7 @@ public class User {
 			return "register";
 		}
 				
-		userRepository.save(user);
-		
+		userRegisterService.addUser(user);		
 		return "register";
 	}
 	
