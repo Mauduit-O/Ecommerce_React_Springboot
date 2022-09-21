@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html th:fragment="header" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Test</h1>
+
+	<div class="container text-center">
+		<div th:if="${param.error}">
+			<h3> Email ou mot de passe invalide.</h3>
+		</div>
+	    <div th:if="${param.logout}">
+	        <h3>Vous avez été déconnecté.</h3>
+	    </div>
+	    <div>
+	    	<form th:action="@{/logout}" method="post">
+	            <p>Bienvenue [[${#request.userPrincipal.principal.fullName}]]</p>
+	            <input type="submit" value="Sign Out" />
+	        </form>
+	    </div>
+		
+		<div>
+	        <h1>Liste des utilisateurs</h1>
+	    </div>		
+	</div>
+</body>
+</html>
