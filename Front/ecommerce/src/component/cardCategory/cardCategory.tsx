@@ -16,7 +16,7 @@ export default function CardCategory(props: titleCardProps): JSX.Element {
         <Styled.TitleCardCategory>{titleCard}</Styled.TitleCardCategory>
         <Button text='Motos' className='btnCardCat'></Button>
       </Styled.ContainerCard>
-      <Styled.CardCategoryImg src={`${imgCardCat}`}></Styled.CardCategoryImg>
+      <Styled.CardCategoryImg src={require('../../assets/img/'+imgCardCat+'')} ></Styled.CardCategoryImg>
     </Styled.ContainerCategory>
   )
 }

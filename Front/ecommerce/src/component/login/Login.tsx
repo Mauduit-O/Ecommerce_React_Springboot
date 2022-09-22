@@ -26,24 +26,33 @@ export default function Login() {
     setPassword(e.target.value);
   }
 
-  const handleSubmite=(e: React.FormEvent<HTMLFormElement>)=>{
-    // if(password)
-    // {
-    //   const pwdDif ="Les mots de passe ne sont pas identique";
-    //   alert("Les mots de passe ne sont pas identique");
-    // }
-    // else{
-    //   // display alert box with user
-    //   // 'name' and 'email' details .
-      alert('Bienvenue chez HarleyD');
-      console.log("ds le submit")
-    // }
-    // e.preventDefault();
-  }
+  // const handleSubmite=(e: React.FormEvent<HTMLFormElement>)=>{
+  //   // if(password)
+  //   // {
+  //   //   const pwdDif ="Les mots de passe ne sont pas identique";
+  //   //   alert("Les mots de passe ne sont pas identique");
+  //   // }
+  //   // else{
+  //   //   // display alert box with user
+  //   //   // 'name' and 'email' details .
+  //     alert('Bienvenue chez HarleyD');
+  //     console.log("ds le submit")
+  //   // }
+  //   // e.preventDefault();
+  // }
+
+  const [values, setValues] = useState({
+    userName: '',
+    password: ''
+  });
+
+  const handleSubmit=(evt: React.FormEvent<HTMLFormElement>)=>{
+    console.log("test")
+  };
 
   return (
     <ModalForm titleForm={"Connexion"}>
-        <form method="post" onSubmit={(e) => {handleSubmite(e)}}>
+        <form method="post" onSubmit={(e) => {handleSubmit(e)}}>
         <Styled.ContainerInput>
           <Input type={"text"} name={"email"} value={email} placeholder={"Email"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {handleEmailChange(e)}}></Input>
           <Input type={"password"} name={"password"} value={password} placeholder={"Mot de passe"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}></Input>
