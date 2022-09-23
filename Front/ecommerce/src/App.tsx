@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register/>} />
         <Route path="/login" element={<Login />} />
-        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/products/:id" element={<ProductsPage />} />
         <Route path="/profil/:id" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

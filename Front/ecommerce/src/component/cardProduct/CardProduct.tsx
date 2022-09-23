@@ -2,20 +2,28 @@ import * as Styled from './StyledCardProduct';
 import IconAddProduct from '../../assets/icon/addBasket.svg'
 import ImgProduct from '../../assets/img/cvo-road-glide-limited.webp'
 
-export default function CardProduct() {
+interface CardProductProps  {
+  title: string,
+  price: number,
+  image: string,
+}
+
+export default function CardProduct(props: CardProductProps): JSX.Element {
+const {title, price, image} = props;
+
   return (
     <Styled.CardProduct>
       <Styled.CardTop>
-        <Styled.Title> Titre produit </Styled.Title>
+        <Styled.Title> {title} </Styled.Title>
         <Styled.LinkMore>Détails</Styled.LinkMore>
       </Styled.CardTop>
       <Styled.ContainerImg>
-        <Styled.ImgProduct src={ImgProduct} alt="Image produit" />
+        <Styled.ImgProduct src={require('../../assets/img/'+image+'')} alt="Image produit" />
       </Styled.ContainerImg>
 
       <Styled.CardBottom>
         <Styled.ContainerInfos>
-          <Styled.Price>14000 €</Styled.Price>
+          <Styled.Price>{price} €</Styled.Price>
         </Styled.ContainerInfos>
         <Styled.ContainerIcons>
           <form method="post">

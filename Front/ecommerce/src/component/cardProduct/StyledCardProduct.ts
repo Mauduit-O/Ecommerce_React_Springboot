@@ -77,6 +77,10 @@ export const ImgProduct = styled.img`
   margin-top:5%;
   margin-bottom:5%;
 
+  @media screen and (min-width: 500px) {
+    width: 48vw; 
+  }
+
   @media screen and (min-width: 820px) {
     width: 300px;
     padding-top:5%;  

@@ -2,7 +2,7 @@ import * as Styled from './StyledHome'
 import ImgHero from "../../assets/img/hero-moto.jpeg"
 import CardCategory from '../../component/cardCategory/cardCategory';
 
-import React, {Fragment, useState, useEffect} from "react";
+import {useState, useEffect} from "react";
 import axios from 'axios';
 
 export default function Home() {
@@ -36,7 +36,7 @@ export default function Home() {
         </Styled.ContainerTextHero>
       </Styled.Hero>
       {data.map((item:any )=>(
-      <CardCategory key={item.id} titleCard={item.title} imgCardCat={item.image} ></CardCategory>
+      <CardCategory key={item.id} titleCard={item.subtitle} imgCardCat={item.image} nameBtn={item.title} link={item.id} ></CardCategory>
       ))}    
     </>
   )
