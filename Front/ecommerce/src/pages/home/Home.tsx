@@ -1,15 +1,14 @@
 import * as Styled from './StyledHome'
 import ImgHero from "../../assets/img/hero-moto.jpeg"
 import CardCategory from '../../component/cardCategory/cardCategory';
-
 import {useState, useEffect} from "react";
 import axios from 'axios';
 
 export default function Home() {
   const [data, setData] = useState<any>([]);
   
-  const fetchData = async () => {
-    await axios 
+  const fetchData = () => {
+    axios 
     .get('/category', {
       baseURL: 'http://localhost:8082',
     })

@@ -8,7 +8,6 @@ export const ContainerCategory = styled.div`
     flex-direction: row-reverse;
   }
 `
-
 export const ContainerCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,7 +24,6 @@ export const ContainerCard = styled.div`
     width: 30vw;
   }
 `
-
 export const TitleCardCategory = styled.h1`
   width: 73vw;
   font-size: 17px;
@@ -41,7 +39,6 @@ export const TitleCardCategory = styled.h1`
     width: auto;
   }
 ` 
-
 export const CardCategoryImg = styled.img`
   width: 100vw;
   height: ;

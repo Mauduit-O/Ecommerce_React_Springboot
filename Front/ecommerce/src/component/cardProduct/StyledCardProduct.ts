@@ -24,28 +24,18 @@ export const CardProduct = styled.div`
       margin-right: -2%;
     }
   }
-
 `
-// .container-card-produit {
-
-
 export const CardTop = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 `
-// .card-produit-top {
-
-
 export const Title = styled.h1`
   font-size: 16px;	
   @media (min-width: 820px) {
     font-size: 20px;	
   }
 `
-// .container-card-produit h1{
-
-
 export const LinkMore = styled.a`
 	font-family: "Avenir-light";
 	font-size: 12px;
@@ -62,15 +52,10 @@ export const LinkMore = styled.a`
     font-size: 14px;	
   }
 `
-// .card-produit-top a {
-
 export const ContainerImg = styled.div`
   text-align: center;
   height:300px;
-`
-// .container-card-produit-img {
-    
-    
+`    
 export const ImgProduct = styled.img`
   text-align: center;
   width: 70vw;
@@ -86,14 +71,9 @@ export const ImgProduct = styled.img`
     padding-top:5%;  
   }
 `
-// .container-card-produit-img img{
-
-	
 export const CardBottom = styled.div`
   display: flex;
 `
-// .card-produit-bottom {
-
 export const ContainerInfos = styled.div`
   width: 50vw;
   display: flex;
@@ -101,10 +81,6 @@ export const ContainerInfos = styled.div`
   align-content: center;
   margin-bottom: 0;
 `
-// .card-produit-infos {
-
-
-
 export const Price = styled.p`
   margin-bottom: 0;
   font-size: 16px;
@@ -114,10 +90,6 @@ export const Price = styled.p`
     font-size: 18px;
   }
 `
-// .card-produit-infos p {
-
-
-
 export const InfosSpan = styled.span`
 	margin-left: 4px;
   font-size: 14px;
@@ -127,24 +99,16 @@ export const InfosSpan = styled.span`
     font-size: 16px;
   }
 `
-// .card-produit-infos span {
-
-
 export const ContainerIcons = styled.div`
   width: 50vw;
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
 `   
-// .card-produit-icons-add {
-
 export const BtnAdd = styled.button`
   background:transparent;
   border:none;
 `   
-// .card-produit-icons-add button {
-
-
 export const IconAddBasket = styled.img`
   margin-left: 24px;
   cursor: pointer;
@@ -157,4 +121,3 @@ export const IconAddBasket = styled.img`
     width: 25px;
   }
 `
-// .card-produit-icons-add img{

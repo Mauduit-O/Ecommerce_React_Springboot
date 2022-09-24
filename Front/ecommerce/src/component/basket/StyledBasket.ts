@@ -27,12 +27,7 @@ export const BottomBasket = styled.div`
   right: 0;
   padding: 4% 0;
 `
-
 export const ContainerBtn = styled.div`
 	display: flex;
   justify-content: center;	
 `
-
-
-
-

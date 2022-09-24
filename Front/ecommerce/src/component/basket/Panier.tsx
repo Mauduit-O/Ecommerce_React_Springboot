@@ -1,9 +1,9 @@
 import * as Styled from './StyledBasket'
-import TotalPrice from "../../totalPrice/TotalPrice";
+import TotalPrice from "../totalPrice/TotalPrice";
 import CardProductBasket from './cardProductBasket/CardProductBasket';
-import StyledBtnModal from '../../btnModal/BtnModal';
+import StyledBtnModal from '../btnModal/BtnModal';
 
-export default function Panier() {
+export default function Basket() {
   return (
     <div>
       <form method="post">
@@ -18,7 +18,6 @@ export default function Panier() {
           <CardProductBasket/>
         </Styled.ContainerOverflow>
 
-
         <Styled.BottomBasket>
           <TotalPrice></TotalPrice>
 
@@ -30,9 +29,7 @@ export default function Panier() {
             <StyledBtnModal text='Continuer mon shopping' className='btnLight'/>
           </Styled.ContainerBtn>
         </Styled.BottomBasket>
-
       </form>
     </div>
-
   )
 }
