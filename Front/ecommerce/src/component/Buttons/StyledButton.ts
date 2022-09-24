@@ -34,7 +34,7 @@ export const Btn = styled.button<{
   }
 
   &.btnCardCat {
-    width: 145px;
+    width:  217px;
     height: 38px;
     font-size: 18px;
 
@@ -44,7 +44,6 @@ export const Btn = styled.button<{
     }
   }
 `;
-
 export const SpanBtn = styled.span`
 	position: relative; 
   	z-index: 1;

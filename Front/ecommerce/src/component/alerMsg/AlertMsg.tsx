@@ -1,4 +1,3 @@
-import StyledBtnModal from '../btnModal/BtnModal';
 import * as Styled from './StyledAlertMsg';
 
 interface MsgProps {

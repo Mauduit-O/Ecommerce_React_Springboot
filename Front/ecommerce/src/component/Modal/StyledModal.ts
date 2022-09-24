@@ -90,25 +90,3 @@ export const TitleModal = styled.div `
       font-size: 18px;
   }
 ` 
-
-// .container-modal-panier-top h1{
-
-// }
-
-
-// }
-
-// .container-modal-panier-top a {
-// 	font-size: 12px;
-// 	cursor: pointer;
-// }
-
-//  @media screen and (min-width: 604px) 
-// {
-// 	.container-modal-panier-top a{
-// 		font-size: 14px;
-// 	}
-// }
-
-// .container-modal-panier-top a:hover {
-// 	text-decoration: underline !important;

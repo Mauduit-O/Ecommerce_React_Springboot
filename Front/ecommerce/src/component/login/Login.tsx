@@ -51,7 +51,7 @@ export default function Login() {
   };
 
   return (
-    <ModalForm titleForm={"Connexion"}>
+    // <ModalForm titleForm={"Connexion"}>
         <form method="post" onSubmit={(e) => {handleSubmit(e)}}>
         <Styled.ContainerInput>
           <Input type={"text"} name={"email"} value={email} placeholder={"Email"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {handleEmailChange(e)}}></Input>
@@ -59,7 +59,7 @@ export default function Login() {
           <BtnModal type={"submit"} name="BtnLogin" text={"Se connecter"} className={"btnDark" }></BtnModal>
         </Styled.ContainerInput>
         </form>
-    </ModalForm>
+    // </ModalForm>
   )
 }
 

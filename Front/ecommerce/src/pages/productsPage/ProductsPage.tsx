@@ -4,35 +4,82 @@ import * as Styled from './StyledProductsPage';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { SelectSubCategory } from '../../component/select/Select';
+import { useGetSubcategory } from '../../hooks/useGetSubcategory';
+import { Subcategory } from '../../interface/SubcategoryInterface';
+import { useGetProducts } from '../../hooks/useGetProducts';
+import { Product } from '../../interface/ProductInterface';
+import { Option } from '../../interface/OptionInterface';
 
+export default function ProductsPage(): JSX.Element {
 
-export default function ProductsPage()  {
-  const [data, setData] = useState<any>([]);
+  const [options, setOptions] = useState<[{}]>([{}]);
+  const [subcategorys, setSubcategorys] = useState<Subcategory[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [filters, setFilters] = useState<Option[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [searchedProduct, setSearchedProduct] = useState<Product[]>([]);
   const { id } = useParams();  
 
-  const fetchData = async () => {
-    await axios 
-    .get('/productById'+id+'', {
-      baseURL: 'http://localhost:8082',
-    })
-    .then((response) => {
-      setData(response.data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  };
+  const getSubcategory = useGetSubcategory();
+  const getProducts = useGetProducts();
+
+  // const displaySearchedProducts = () => {
+  //   setSearchedProduct(products.filter((product) => product.title.includes(searchTerm)));
+  // }
 
   useEffect(() => {
-    fetchData();
+    getProducts().then(data => {
+      setProducts(data);
+      setFilteredProducts(data);
+    })
   }, [])
+  
+  useEffect(() => {
+    getSubcategory().then(data => {
+      setSubcategorys(data)
+    })
+  }, [])
+
+  function getOptions() {
+    subcategorys.map((subcategory) => {
+      options.push({
+        value: subcategory.id, 
+        label: subcategory.title,
+        color: "#0B7698",
+      }) 
+      setOptions(options)
+    })
+  }
+
+  useEffect(() => {
+    getOptions()
+  }, [subcategorys])
+
+  const handleChange = (selectedOption: any) => {
+    setFilters(selectedOption)
+  };
+
+  const filterProducts = () => {
+    if(filters.length===0) {
+      setFilteredProducts(products)
+    } else {
+      setFilteredProducts(products.filter((product) => filters.findIndex((filter) => filter.label === product.id_subcategory.title) !== -1))
+    }
+  }
+
+  useEffect (() => {
+    filterProducts()
+  }, [filters])
 
   return (
     <>
-      <SelectSubCategory></SelectSubCategory>
+      <SelectSubCategory 
+        options={options}
+        handleChange={handleChange}
+      />
       <Styled.Container>
-        {data.map((item:any )=>(
-          <CardProduct key={item.id} title={item.title} price={item.price} image={item.image} />
+        {filteredProducts.map((product )=>(
+          <CardProduct key={product.id} title={product.title} price={product.price} image={product.image} souscat={product.id_subcategory.title} />
         ))} 
       </Styled.Container>
     </>

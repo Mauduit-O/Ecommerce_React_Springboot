@@ -21,7 +21,7 @@ import com.ecommerce.harleyD.repository.SubcategoryRepository;
 
 
 
-@CrossOrigin(origins="http://localhost:3002/")
+@CrossOrigin(origins="http://localhost:3000/")
 @RestController
 public class Category {
 	

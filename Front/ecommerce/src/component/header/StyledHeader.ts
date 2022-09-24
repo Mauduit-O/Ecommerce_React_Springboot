@@ -46,7 +46,13 @@ export const ContentNav = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  width: '99vw'
+  width: '66vw',
+  [theme.breakpoints.up(370)]: {
+    width: '68vw',
+  },
+  [theme.breakpoints.up('sm')]: {
+    width: '99vw',
+  },
 }));
 
 export const Search = styled('div')(({ theme }) => ({

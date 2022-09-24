@@ -1,8 +1,6 @@
 import * as Styled from './StyledCardCategory'
 import Button from '../../component/Buttons/Button';
 import { NavLink } from "react-router-dom";
-// import CardCatImg from './imgCategory';
-
 
 interface titleCardProps {
   titleCard : string;
@@ -23,7 +21,3 @@ export default function CardCategory(props: titleCardProps): JSX.Element {
     </Styled.ContainerCategory>
   )
 }
-
-
-
-
