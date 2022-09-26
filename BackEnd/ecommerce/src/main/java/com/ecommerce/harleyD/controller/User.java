@@ -1,113 +1,147 @@
 package com.ecommerce.harleyD.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecommerce.harleyD.jwt.JwtController;
+import com.ecommerce.harleyD.jwt.JwtFilter;
+import com.ecommerce.harleyD.jwt.JwtUtils;
 import com.ecommerce.harleyD.model.UserM;
 import com.ecommerce.harleyD.repository.UserRepository;
-import com.ecommerce.harleyD.service.UserRegisterService;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
+@CrossOrigin(origins="http://localhost:3000/")
 public class User {
 	
 	@Autowired
 	private UserRepository userRepository;
 	
-	@Autowired
-	private UserRegisterService userRegisterService;
-	
-	@GetMapping("/")
-	private String userShow( UserM user, Model model, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
-			bindingResult.addError(new FieldError("user", "password", "mot de passe"));
-			return "register";
-		}
 
-		List<UserM> users = userRepository.findAll();
-		model.addAttribute("users", users);
-		
-		System.out.println(users);
-		
-		return "register";
+	@Autowired
+	JwtController jwtController;
+	
+	@Autowired
+    JwtUtils jwtUtils;
+	
+	
+    @PostMapping("/users")
+    public ResponseEntity<?> add(@Valid @RequestBody UserM userInfo, HttpServletResponse response) {
+	 
+        UserM existingUser = userRepository.findByEmail(userInfo.getEmail());
+        
+        if(existingUser != null) {
+            return new ResponseEntity<>("User already existing", HttpStatus.BAD_REQUEST);
+        }
+
+        // On Sauvegarde en BDD le user
+        UserM user = saveUser(userInfo);
+        // On enregistre le user dans le context de spring Security 
+        Authentication authentication = jwtController.logUser(userInfo.getEmail(), userInfo.getPassword());
+        //On génere le token et les headers
+        String jwt = jwtUtils.generateToken(authentication);
+        System.out.println(jwt);
+        //On ajoute le jwt token dans le header
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+        System.out.println(httpHeaders);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+    
+    @GetMapping(value = "/isConnected")
+    public ResponseEntity<?> getUSerConnected() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+        	System.out.println("je suis connecté");
+            return new ResponseEntity<>(((UserDetails) principal).getUsername(), HttpStatus.OK);
+        }
+        System.out.println(principal);
+        System.out.println("je ne suis pas connecté");
+        return new ResponseEntity<>("User is not connected", HttpStatus.FORBIDDEN);
+    }
+    
+	  
+	private UserM saveUser(UserM userInfo) {
+		UserM user = new UserM();
+	    user.setEmail(userInfo.getEmail());
+	    user.setPassword(new BCryptPasswordEncoder().encode(userInfo.getPassword()));
+	    user.setLastname(StringUtils.capitalize(userInfo.getLastname()));
+	    user.setFirstname(StringUtils.capitalize(userInfo.getFirstname()));
+	    user.setStreet(StringUtils.capitalize(userInfo.getStreet()));
+	    user.setCity(StringUtils.capitalize(userInfo.getCity()));
+	    user.setPostal_code(StringUtils.capitalize(userInfo.getPostal_code()));
+	    user.setCountry(StringUtils.capitalize(userInfo.getCountry()));
+	    user.setPhone(StringUtils.capitalize(userInfo.getPhone()));
+	    
+	    
+	    userRepository.save(user);
+	    return user;
 	}
 	
-	@PostMapping("/")
-	private String AddUser(@Validated UserM userM, Model model, BindingResult bindingResult) {
-		if(bindingResult.hasErrors()) {
-			return "register";
-		}
-				
-		userRegisterService.addUser(userM);		
-		return "register";
-	}
 	
-	@GetMapping("/login")
-	public UserM userSig(@Validated UserM userM, BindingResult bindingResult) {
-		
-		System.out.println(userM.getEmail());
-		
-		
-		if(bindingResult.hasErrors()) {
-			System.out.println("eeeeeeeeeeeeeeeee");
-			return userM;
-		}
-		return userM;
-		
-		
-	}
 	
-//	@PostMapping("/login")
-//	public String userSignin(@Validated UserM userM, BindingResult bindingResult) {
+	
+//	
+//	@Autowired
+//	private UserRegisterService userRegisterService;
+//	
+//	@GetMapping("/")
+//	private String userShow( UserM user, Model model, BindingResult bindingResult) {
+//		if(bindingResult.hasErrors()) {
+//			bindingResult.addError(new FieldError("user", "password", "mot de passe"));
+//			return "register";
+//		}
+//
+//		List<UserM> users = userRepository.findAll();
+//		model.addAttribute("users", users);
+//		
+//		System.out.println(users);
+//		
+//		return "register";
+//	}
+//	
+//	@PostMapping("/")
+//	private String AddUser(@Validated UserM userM, Model model, BindingResult bindingResult) {
+//		if(bindingResult.hasErrors()) {
+//			return "register";
+//		}
+//				
+//		userRegisterService.addUser(userM);		
+//		return "register";
+//	}
+//	
+//	@GetMapping("/login")
+//	public UserM userSig(@Validated UserM userM, BindingResult bindingResult) {
 //		
 //		System.out.println(userM.getEmail());
 //		
 //		
 //		if(bindingResult.hasErrors()) {
 //			System.out.println("eeeeeeeeeeeeeeeee");
-//			return "login";
+//			return userM;
 //		}
+//		return userM;
 //		
-//		return "login";
+//		
 //	}
 	
-	@GetMapping("/test")
-	public String userLogin(@Validated UserM userM, BindingResult bindingResult) {
-		
-		System.out.println(userM.getEmail());
-		
-		
-		if(bindingResult.hasErrors()) {
-			System.out.println("eeeeeeeeeeeeeeeee");
-			return "test";
-		}
-		
-		return "test";
-	}
-	
-	
-	
-	
-//	@PostMapping("/")
-//	public String postHome(@Valid @ModelAttribute("user") UserM user, BindingResult bindingResult) {
-//		System.out.println(bindingResult.hasErrors());
-////		System.out.println(user.getEmail());
-//		if(bindingResult.hasErrors()) {
-//			return "home";
-//		}
-//		
-//
-//		userRepository.save(user);
-//
-//		
-//		return "home";
-//	}
+
+
 }

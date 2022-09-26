@@ -1,65 +1,46 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import * as Styled from './StyledLogin'
+import * as Styles from '../input/SyledInput';
 import BtnModal from "../btnModal/BtnModal";
-import Input from "../input/Input";
-import ModalForm from "../modalForm/ModalForm";
+import { useForm } from "react-hook-form";
+import axios from 'axios';
+import { AUTH_TOKEN_KEY } from '../../App';
 
 export default function Login() {
-  const [email , setEmail] = useState('');
-  const [password , setPassword] = useState('');
- 
-  
-  const handleEmailChange =(e: React.ChangeEvent<HTMLInputElement>)=>{
-    let regexMail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    setEmail(e.target.value); 
-    // return (e.target.value).match(regexMail) ? (alert("bon"),  setEmail(e.target.value) ): alert("pas");
-    // if(!(e.target.value).match(regexMail)) {
-    //   alert("pas");
-    // } else {
-    //   alert("bon");
-    // }
-    // e.preventDefault();
+  const { register, handleSubmit } = useForm();
+
+  const [userInfo, setUserInfo] = useState("");
+  const onSubmit = (data: any) => {
+    axios
+      .post(
+        'http://localhost:8082/authenticate',
+        data,
+        { headers: { 'Content-Type': 'application/json' }}
+        
+      )
+   .then((response) => {
+        const bearerToken = response?.headers?.authorization;
+        if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
+          const jwt = bearerToken.slice(7, bearerToken.length);
+          sessionStorage.setItem(AUTH_TOKEN_KEY,jwt)
+        }
+        setUserInfo(response.data)
+    }).catch(error => {
+      if(error.status === 401) {
+        console.log('Your Username or Password is incorrect. Please try again!');
+      } else {
+        console.log(error.data);
+      }
+    })
   }
-
-  const handlePasswordChange =(e: React.ChangeEvent<HTMLInputElement>)=>{
-    console.log(e.target.value)
-    setPassword(e.target.value);
-  }
-
-  // const handleSubmite=(e: React.FormEvent<HTMLFormElement>)=>{
-  //   // if(password)
-  //   // {
-  //   //   const pwdDif ="Les mots de passe ne sont pas identique";
-  //   //   alert("Les mots de passe ne sont pas identique");
-  //   // }
-  //   // else{
-  //   //   // display alert box with user
-  //   //   // 'name' and 'email' details .
-  //     alert('Bienvenue chez HarleyD');
-  //     console.log("ds le submit")
-  //   // }
-  //   // e.preventDefault();
-  // }
-
-  const [values, setValues] = useState({
-    userName: '',
-    password: ''
-  });
-
-  const handleSubmit=(evt: React.FormEvent<HTMLFormElement>)=>{
-    console.log("test")
-  };
 
   return (
-    // <ModalForm titleForm={"Connexion"}>
-        <form method="post" onSubmit={(e) => {handleSubmit(e)}}>
-        <Styled.ContainerInput>
-          <Input type={"text"} name={"email"} value={email} placeholder={"Email"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {handleEmailChange(e)}}></Input>
-          <Input type={"password"} name={"password"} value={password} placeholder={"Mot de passe"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => handlePasswordChange(e)}></Input>
-          <BtnModal type={"submit"} name="BtnLogin" text={"Se connecter"} className={"btnDark" }></BtnModal>
-        </Styled.ContainerInput>
-        </form>
-    // </ModalForm>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Styled.ContainerInput>
+        <Styles.Input {...register("email")}  type={"text"} placeholder={"Email"}></Styles.Input>
+        <Styles.Input {...register("password")} type={"password"}  placeholder={"Mot de passe"}></Styles.Input>
+        <BtnModal type={"submit"} name="BtnLogin" text={"Se connecter"} className={"btnDark" }></BtnModal>
+      </Styled.ContainerInput>
+    </form>
   )
 }
-

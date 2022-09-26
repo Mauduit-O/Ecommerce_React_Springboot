@@ -11,67 +11,34 @@ import axios from 'axios';
 import Search from './pages/search/Search';
 
 // Nom de la clé ou on va stocké notre token dans le localStorage
-export const AUTH_TOKEN_KEY = 'JSESSIONID';
+export const AUTH_TOKEN_KEY = 'jhiauthenticationToken';
 
 function App() {
 
   const [searchTerm, setSearchTerm ] = useState<string>("");
 
   const handleChange = (e: any) => {
-    setSearchTerm(e.target.value.toLowerCase());
-
-    console.log(searchTerm);
-    
+    setSearchTerm(e.target.value.toLowerCase());    
   }
 
-  // function setLoading(arg0: boolean) {
-  //   throw new Error('Function not implemented.');
-  // }
-
-  // Mise en place d'un intercepteur pour automatiquement ajouter un token JWT dans
-  // si il est present dans le localstorage 
-
-  const [userInfo, setUserInfo] = useState('');
-  // const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-
-  //   axios.interceptors.request.use(function (request) {
-  //     const token = sessionStorage.getItem(AUTH_TOKEN_KEY)
-  //     if (token) {
-  //       request.headers= { 
-  //         "Authorization" : `Bearer ${token}`
-  //       }
-  //     }
-  //     console.log(token)
-  //     // setLoading(true)
-  //     return request
-  //   }, (error) => {
-  //     // setLoading(false)
-  //     return Promise.reject(error);
-  //   });
-
-  //   axios.interceptors.response.use(function (response) {
-  //     // setLoading(false)
-  //     return response;
-  //   }, (error) => {
-  //     // setLoading(false)
-  //     return Promise.reject(error);
-  //   });
-  // }, [])
-
+  // Mise en place d'un intercepteur pour automatiquement ajouter un token JWT si il est present dans le localstorage 
   const [loading, setLoading] = useState(false)
+  const service = axios.create({
+    timeout: 20000 // request timeout
+  });
+  
 
   useEffect(() => {
-    axios.interceptors.request.use(function (request) {
+    axios.interceptors.request.use(function (request: any) {
       const token = sessionStorage.getItem(AUTH_TOKEN_KEY)
-      if (token) {
-        request.headers= { 
-          "Authorization" : `Bearer ${token}`
-        }
+      if (token) {       
+        // request.headers.Authorization = `Bearer ${token}`;
+        request.headers["Authorization"] = `Bearer ${token}`;
       }
       setLoading(true)
+      console.log(request);
       return request
+      
     }, (error) => {
       setLoading(false)
       return Promise.reject(error);
