@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import CardProduct from '../../component/cardProduct/CardProduct';
 import * as Styled from './StyledProductsPage';
-import axios from 'axios';
 import { useParams } from "react-router-dom";
 import { SelectSubCategory } from '../../component/select/Select';
 import { useGetSubcategory } from '../../hooks/useGetSubcategory';
@@ -17,15 +16,9 @@ export default function ProductsPage(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
   const [filters, setFilters] = useState<Option[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [searchedProduct, setSearchedProduct] = useState<Product[]>([]);
-  const { id } = useParams();  
 
   const getSubcategory = useGetSubcategory();
   const getProducts = useGetProducts();
-
-  // const displaySearchedProducts = () => {
-  //   setSearchedProduct(products.filter((product) => product.title.includes(searchTerm)));
-  // }
 
   useEffect(() => {
     getProducts().then(data => {

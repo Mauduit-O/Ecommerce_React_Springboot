@@ -12,11 +12,11 @@ public class UserRegisterService {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
-	public void addUser(UserM user) {
-		BCryptPasswordEncoder encodePwd = new BCryptPasswordEncoder();
-		user.setPassword(encodePwd.encode(user.getPassword()));
-		
-		userRepository.save(user);
-	}
+//	
+//	public void addUser(UserM user) {
+//		BCryptPasswordEncoder encodePwd = new BCryptPasswordEncoder();
+//		user.setPassword(encodePwd.encode(user.getPassword()));
+//		
+//		userRepository.save(user);
+//	}
 }

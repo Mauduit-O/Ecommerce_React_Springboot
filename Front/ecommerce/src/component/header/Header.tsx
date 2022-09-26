@@ -12,17 +12,19 @@ import iconBasket  from '../../assets/icon/basket.svg'
 import iconUser  from '../../assets/icon/user.svg';
 import iconMenu  from '../../assets/icon/menu.svg';
 import * as Styled from './StyledHeader';
-import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import * as Styles from './StyledHeader';
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import MenuM from '../menu/Menu';
 import Register from '../register/Register';
 import Login from '../login/Login';
 import ModalForm from '../modalForm/ModalForm';
 import Modal from '../modal/Modal';
 import Basket from '../basket/Panier';
+// import axios from 'axios';
 
 interface HearderProps {
-  handleChange: (e: React.MouseEvent<HTMLAnchorElement>) => void
+  handleChange: (e: React.MouseEvent<HTMLAnchorElement>) => void,
 }
 
 export default function Header(props: HearderProps): JSX.Element {
@@ -83,6 +85,23 @@ export default function Header(props: HearderProps): JSX.Element {
     </Menu>
   );
 
+  const [userInfoHeader, setUserInfoHeader] = useState();
+  // const history = useNavigate();
+  // const location = useLocation();
+  
+  // useEffect(() => {
+  //   // setUserInfo(null);
+  //   axios.get('http://localhost:8082/isConnected').then(response => {
+  //     setUserInfoHeader(response.data)
+  //   }, () => {
+  //     if (location.pathname === '/addUser') {
+  //       history("/login")
+  //     }
+  //   })
+  // }, [history, setUserInfoHeader, location.pathname]);
+  // console.log(userInfoHeader);
+  
+  
   return (
     <Box sx={{ flexGrow: 1 }}>
       {openMenu && (
@@ -105,60 +124,61 @@ export default function Header(props: HearderProps): JSX.Element {
              <Login/>
           </ModalForm>
       )}
-      
-      <Styled.ContainerAppBar>
-        <AppBar className='container-header'>
-          <Toolbar>
-            <Styled.ContentNav>
-              <IconButton
-                size="large"
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={()=>setOpenMenu(true)}
-              >
-                <Styled.Img src={iconMenu} alt="icon menu"/>
-              </IconButton>
-              <NavLink to="/"><Styled.Logo src={logo} alt="logo HarleyD" /></NavLink>
-              <Styled.Search className='container-search'>
-                <Styled.SearchIconWrapper>
-                  <SearchIcon />
-                </Styled.SearchIconWrapper>
-                <Styled.StyledInputBase
-                  placeholder="Rechercher"
-                  inputProps={{ 'aria-label': 'search' }}
-                  onChange={(e: any) => onChange(e)}
-                />
-              </Styled.Search>
-            </Styled.ContentNav>
+      <Styles.ContainerHeader>
+        <Styled.ContainerAppBar>
+          <AppBar className='container-header'>
+            <Toolbar>
+              <Styled.ContentNav>
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={()=>setOpenMenu(true)}
+                >
+                  <Styled.Img src={iconMenu} alt="icon menu"/>
+                </IconButton>
+                <NavLink to="/"><Styled.Logo src={logo} alt="logo HarleyD" /></NavLink>
+                <Styled.Search className='container-search'>
+                  <Styled.SearchIconWrapper>
+                    <SearchIcon />
+                  </Styled.SearchIconWrapper>
+                  <Styled.StyledInputBase
+                    placeholder="Rechercher"
+                    inputProps={{ 'aria-label': 'search' }}
+                    onChange={(e: any) => onChange(e)}
+                  />
+                </Styled.Search>
+              </Styled.ContentNav>
 
-            <Box sx={{ flexGrow: 1 }} />
+              <Box sx={{ flexGrow: 1 }} />
+              
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="account of current user"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <Styled.Img src={iconUser} alt="icon user" />
+                </IconButton>
+                <IconButton
+                  size="large"
+                  aria-label="show basket"
+                  color="inherit"
+                  onClick={()=>setOpenBasket(true)}
+                >
+                  <Badge badgeContent={2} color="error">
+                    <Styled.Img src={iconBasket} alt="icon panier" />
+                  </Badge>
+                </IconButton>
             
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <Styled.Img src={iconUser} alt="icon user" />
-              </IconButton>
-              <IconButton
-                size="large"
-                aria-label="show basket"
-                color="inherit"
-                onClick={()=>setOpenBasket(true)}
-              >
-                <Badge badgeContent={2} color="error">
-                  <Styled.Img src={iconBasket} alt="icon panier" />
-                </Badge>
-              </IconButton>
-          
-          </Toolbar>
-        </AppBar>
-      </Styled.ContainerAppBar>
+            </Toolbar>
+          </AppBar>
+        </Styled.ContainerAppBar>
+      </Styles.ContainerHeader>
       {renderMenu}
     </Box>
   );

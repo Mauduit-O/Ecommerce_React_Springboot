@@ -1,10 +1,27 @@
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import styles from 'styled-components'
+
+export const ContainerHeader = styles.div`
+  padding-bottom: 8vh;
+
+  @media (min-width: 800px) {
+    padding-bottom: 6vh;
+  }
+
+  @media (min-width: 1600px) {
+    padding-bottom: 7vh;
+  }
+
+  @media (min-width: 2000px) {
+    padding-bottom: 6vh;
+  }
+`
 
 export const ContainerAppBar = styled('div')(({ theme }) => ({
   '.container-header': {
     background: 'white',
-    position: 'static'
+    position: 'fixed'
   }
 }));
 

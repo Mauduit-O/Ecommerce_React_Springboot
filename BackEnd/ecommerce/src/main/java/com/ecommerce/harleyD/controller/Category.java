@@ -18,9 +18,6 @@ import com.ecommerce.harleyD.repository.CategoryRepository;
 import com.ecommerce.harleyD.repository.ProductRepository;
 import com.ecommerce.harleyD.repository.SubcategoryRepository;
 
-
-
-
 @CrossOrigin(origins="http://localhost:3000/")
 @RestController
 public class Category {
