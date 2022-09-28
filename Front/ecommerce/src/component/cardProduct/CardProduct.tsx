@@ -1,15 +1,24 @@
 import * as Styled from './StyledCardProduct';
 import IconAddProduct from '../../assets/icon/addBasket.svg';
+import {useCart} from 'react-use-cart'
 
-interface CardProductProps  {
+interface Item  {
+  id: string,
   title: string,
   price: number,
   image: string,
-  souscat: string
+  souscat: string,
+  quantity: number
 }
 
-export default function CardProduct(props: CardProductProps): JSX.Element {
+export default function CardProduct(props: Item): JSX.Element {
 const {title, price, image, souscat} = props;
+
+const { addItem } = useCart();
+
+const addToCart = () => {
+  addItem(props)
+}
 
   return (
     <Styled.CardProduct>
@@ -27,9 +36,9 @@ const {title, price, image, souscat} = props;
         </Styled.ContainerInfos>
         <Styled.ContainerIcons>
           <form method="post">
-            <Styled.BtnAdd type="submit" name="btnAdd" value="">	
-              <Styled.IconAddBasket src={IconAddProduct} alt="Icon ajout panier" />
-            </Styled.BtnAdd>
+            {/* <Styled.BtnAdd onClick={()=> addToCart()} type="submit" name="btnAdd" value="">	 */}
+              <Styled.IconAddBasket onClick={()=> addToCart()}  src={IconAddProduct} alt="Icon ajout panier" />
+            {/* </Styled.BtnAdd> */}
           </form>		
         </Styled.ContainerIcons>
       </Styled.CardBottom>

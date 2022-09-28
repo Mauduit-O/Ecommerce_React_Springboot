@@ -17,6 +17,8 @@ export default function ProductsPage(): JSX.Element {
   const [filters, setFilters] = useState<Option[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
+
+
   const getSubcategory = useGetSubcategory();
   const getProducts = useGetProducts();
 
@@ -64,6 +66,7 @@ export default function ProductsPage(): JSX.Element {
     filterProducts()
   }, [filters])
 
+
   return (
     <>
       <SelectSubCategory 
@@ -72,7 +75,7 @@ export default function ProductsPage(): JSX.Element {
       />
       <Styled.Container>
         {filteredProducts.map((product )=>(
-          <CardProduct key={product.id} title={product.title} price={product.price} image={product.image} souscat={product.id_subcategory.title} />
+          <CardProduct key={product.id} title={product.title} price={product.price} image={product.image} souscat={product.id_subcategory.title} id={product.id} quantity={0} />
         ))} 
       </Styled.Container>
     </>

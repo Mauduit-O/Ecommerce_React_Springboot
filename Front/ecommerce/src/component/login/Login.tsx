@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import * as Styled from './StyledLogin'
 import * as Styles from '../input/SyledInput';
 import BtnModal from "../btnModal/BtnModal";
@@ -6,18 +6,24 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { AUTH_TOKEN_KEY } from '../../App';
 import { ErrorMessage } from '@hookform/error-message';
+import { useGetUser } from '../../hooks/useGetUser';
+import { User } from '../../interface/UserInterface';
+
 
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [userEmail, setUserEmail] = useState("");
+  const [userInfos, setUserInfos] = useState<any>();
+  const getUser = useGetUser(userEmail);
 
-  const [userInfo, setUserInfo] = useState("");
+
+
   const onSubmit = (data: any) => {
     axios
       .post(
         'http://localhost:8082/authenticate',
         data,
         { headers: { 'Content-Type': 'application/json' }}
-        
       )
    .then((response) => {
         const bearerToken = response?.headers?.authorization;
@@ -25,7 +31,7 @@ export default function Login() {
           const jwt = bearerToken.slice(7, bearerToken.length);
           sessionStorage.setItem(AUTH_TOKEN_KEY,jwt)
         }
-        setUserInfo(response.data.userName)
+        setUserEmail(response.data.userName)
     }).catch(error => {
       if(error.status === 401) {
         console.log('Your Username or Password is incorrect. Please try again!');
@@ -35,10 +41,26 @@ export default function Login() {
     })
   }
 
+  useEffect( () => {
+    if(userEmail) {
+      getUser().then(
+        data =>
+        setUserInfos(data)
+      )
+    }
+  }, [userEmail])
+
+  useEffect( () => {
+    if(userInfos) {
+      localStorage.setItem('userInfos', JSON.stringify(userInfos))
+    }
+  }, [userInfos])
+
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-        {userInfo && (
-          <Styled.RegisterSuccesfull>Bienvenue {userInfo}</Styled.RegisterSuccesfull>
+        {userInfos && (
+          <Styled.RegisterSuccesfull>Bienvenue {userInfos.firstname}</Styled.RegisterSuccesfull>
         )}
       <Styled.ContainerInput>
         <Styles.Input 

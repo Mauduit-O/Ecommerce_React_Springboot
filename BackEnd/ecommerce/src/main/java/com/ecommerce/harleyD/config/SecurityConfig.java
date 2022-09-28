@@ -44,6 +44,7 @@ public class SecurityConfig {
         .antMatchers("/productById{id}").permitAll()
         .antMatchers("/productBySubcat{id}").permitAll()
         .antMatchers("/selectSubCat{id}").permitAll()
+        .antMatchers("/show/{email}").permitAll()
         
         .anyRequest().authenticated();
 	http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
