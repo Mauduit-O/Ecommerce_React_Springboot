@@ -22,11 +22,6 @@ export default function Search(props: ProductsProps): JSX.Element {
     } else {
       setSearchedProduct(products.filter((product) => product.title.toLowerCase().includes(searchTerm)));
     }
-
-    // if(searchedProduct.length===0) {
-    //   console.log(searchedProduct);
-    //   setProductIsEmpty("Aucun produit n'a été trouvé");
-    // }
   }
 
   useEffect(() => {
@@ -44,7 +39,7 @@ export default function Search(props: ProductsProps): JSX.Element {
     <>
       <Styled.Container>
         {searchedProduct.map((product )=>(
-          <CardProduct key={product.id} title={product.title} price={product.price} image={product.image} souscat={product.id_subcategory.title} />
+          <CardProduct key={product.id} title={product.title} price={product.price} image={product.image} souscat={product.id_subcategory.title} id={''} quantity={0} />
         ))} 
         <p>{productIsEmpty}</p>
       </Styled.Container>

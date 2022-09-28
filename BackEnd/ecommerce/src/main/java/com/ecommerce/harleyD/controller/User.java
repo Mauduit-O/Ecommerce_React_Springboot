@@ -3,6 +3,7 @@ package com.ecommerce.harleyD.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +13,8 @@ import com.ecommerce.harleyD.jwt.JwtUtils;
 import com.ecommerce.harleyD.model.UserM;
 import com.ecommerce.harleyD.repository.UserRepository;
 import com.ecommerce.harleyD.service.UserRegisterService;
+
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -80,6 +83,19 @@ public class User {
         System.out.println("je ne suis pas connecté");
         return new ResponseEntity<>("User is not connected", HttpStatus.FORBIDDEN);
     }
+    
+    @GetMapping(value = "/userByEmail")
+    public void userByMail() {
+        
+    }
+    
+	@GetMapping("/show/{email}")
+	public UserM show(@PathVariable(value="email") String userEmail) {
+		UserM user = userRepository.findByEmail(userEmail);
+		return user;	
+	}
+    
+    
     
 	  
 //	private UserM saveUser(UserM userInfo) {

@@ -47,3 +47,17 @@ export const DeleteProduct = styled.button`
   border:none;	
   color: #995E06;
 `
+export const ContainerQuantity = styled.div`
+  display: flex;
+`
+export const BtnQuantity = styled.p`
+  width: 4vw;
+  background: black;
+  border: none;	
+  border-radius: 4px;
+  color: white;
+  margin-right: 15px;
+  font-size: 20px;
+  font-family: "Avenir-Heavy";
+  text-align: center;
+`

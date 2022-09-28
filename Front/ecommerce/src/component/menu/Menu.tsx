@@ -1,5 +1,4 @@
-import * as Styled from '../modal/StyledModal';
-import InfosUser from "./InfosUser";
+import * as Styled from '../Modal/StyledModal';
 
 export default function MenuM() {
 
@@ -10,7 +9,7 @@ export default function MenuM() {
       <Styled.MenuLink href="">Motos</Styled.MenuLink> 
       <Styled.MenuLink href="">Vélo Electrique</Styled.MenuLink> 
     </Styled.ContentMenu>
-    <InfosUser />
+    {/* <InfosUser /> */}
   </Styled.Menu>
   )
 }

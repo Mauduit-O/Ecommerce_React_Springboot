@@ -41,13 +41,7 @@ public class JwtController {
 	     System.out.println(principal);
 	     System.out.println(httpHeaders);
 	     System.out.println(jwt);
-//	     return new ResponseEntity<>(new JwtResponse(((User) principal).getUsername()), httpHeaders, HttpStatus.OK);
 	     return new ResponseEntity<>(new JwtResponse(((User) principal).getUsername()), httpHeaders, HttpStatus.OK);
-	     
-	     
-	     
-	     
-		 
 	 }
 	 
 	    public Authentication logUser(String email, String password) {

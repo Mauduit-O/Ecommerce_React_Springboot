@@ -9,6 +9,10 @@ export const ContainerHeader = styles.div`
     padding-bottom: 6vh;
   }
 
+  @media (min-width: 1200px) {
+    padding-bottom: 8vh;
+  }
+
   @media (min-width: 1600px) {
     padding-bottom: 7vh;
   }
@@ -16,6 +20,10 @@ export const ContainerHeader = styles.div`
   @media (min-width: 2000px) {
     padding-bottom: 6vh;
   }
+`
+export const NameUser = styles.p`
+ color: #0B7698;
+ font-size: 18px;
 `
 
 export const ContainerAppBar = styled('div')(({ theme }) => ({
@@ -87,3 +95,4 @@ export const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
 }));
+

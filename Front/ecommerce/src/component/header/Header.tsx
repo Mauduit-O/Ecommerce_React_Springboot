@@ -13,15 +13,17 @@ import iconUser  from '../../assets/icon/user.svg';
 import iconMenu  from '../../assets/icon/menu.svg';
 import * as Styled from './StyledHeader';
 import * as Styles from './StyledHeader';
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import MenuM from '../menu/Menu';
 import Register from '../register/Register';
 import Login from '../login/Login';
 import ModalForm from '../modalForm/ModalForm';
-import Modal from '../modal/Modal';
+import Modal from '../Modal/Modal';
 import Basket from '../basket/Panier';
-// import axios from 'axios';
+import { useCart } from "react-use-cart";
+import { User } from '../../interface/UserInterface';
+// import { userInfo } from 'os';
 
 interface HearderProps {
   handleChange: (e: React.MouseEvent<HTMLAnchorElement>) => void,
@@ -35,13 +37,28 @@ export default function Header(props: HearderProps): JSX.Element {
   const [openBasket, setOpenBasket] = useState<boolean>(false);
   const [openRegister, setOpenRegister] = useState<boolean>(false);
   const [openLogin, setOpenLogin] = useState<boolean>(false);
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
   const isMenuOpen = Boolean(anchorEl);
+  const getUserInfos = localStorage.getItem("userInfos") 
+  const [parseUserInfos, setParseUserInfos] = useState<User>();
+
+  const {
+    isEmpty,
+    totalItems,
+  } = useCart();
+
+  useEffect(() => {
+    if ( getUserInfos ) {
+      setParseUserInfos(JSON.parse(localStorage.getItem("userInfos") || "") )
+    }
+  }, [getUserInfos])
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
+    if ( parseUserInfos ) {
+      localStorage.removeItem("userInfos");
+      window.location.reload();
+    }
   };
 
   const handleMenuClose = () => {
@@ -80,28 +97,12 @@ export default function Header(props: HearderProps): JSX.Element {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+
       <MenuItem onClick={isOpenLongin}>Se Connecter</MenuItem>
       <MenuItem onClick={isOpenRegister}>S'inscrire</MenuItem>
     </Menu>
   );
 
-  const [userInfoHeader, setUserInfoHeader] = useState();
-  // const history = useNavigate();
-  // const location = useLocation();
-  
-  // useEffect(() => {
-  //   // setUserInfo(null);
-  //   axios.get('http://localhost:8082/isConnected').then(response => {
-  //     setUserInfoHeader(response.data)
-  //   }, () => {
-  //     if (location.pathname === '/addUser') {
-  //       history("/login")
-  //     }
-  //   })
-  // }, [history, setUserInfoHeader, location.pathname]);
-  // console.log(userInfoHeader);
-  
-  
   return (
     <Box sx={{ flexGrow: 1 }}>
       {openMenu && (
@@ -162,7 +163,8 @@ export default function Header(props: HearderProps): JSX.Element {
                   onClick={handleProfileMenuOpen}
                   color="inherit"
                 >
-                  <Styled.Img src={iconUser} alt="icon user" />
+                 {parseUserInfos ? <Styles.NameUser>{parseUserInfos.firstname} </Styles.NameUser> : <Styled.Img src={iconUser} alt="icon user" />} 
+              
                 </IconButton>
                 <IconButton
                   size="large"
@@ -170,7 +172,7 @@ export default function Header(props: HearderProps): JSX.Element {
                   color="inherit"
                   onClick={()=>setOpenBasket(true)}
                 >
-                  <Badge badgeContent={2} color="error">
+                  <Badge badgeContent={totalItems} color="error">
                     <Styled.Img src={iconBasket} alt="icon panier" />
                   </Badge>
                 </IconButton>
@@ -179,7 +181,11 @@ export default function Header(props: HearderProps): JSX.Element {
           </AppBar>
         </Styled.ContainerAppBar>
       </Styles.ContainerHeader>
-      {renderMenu}
+      {!parseUserInfos &&
+        <div>
+          {renderMenu}
+        </div>
+      }
     </Box>
   );
 }
