@@ -19,6 +19,12 @@ export default function Basket() {
 
 const Submit = (e: any) => {
   e.preventDefault();
+  localStorage.removeItem("react-use-cart");
+}
+
+const closeModal = () => {
+  window.location.reload();
+  setOpenOrder(false);
 }
 
   return (
@@ -54,7 +60,7 @@ const Submit = (e: any) => {
           </form>    
 
           {openOrder && (
-          <ModalForm titleForm={'Commande confirmée'} onClick={()=>setOpenOrder(false)}>
+          <ModalForm titleForm={'Commande confirmée'} onClick={closeModal}>
               <Styled.ContainerOder>
                 <div className="container-confirm">
                   <div className="container-confirm-body">	
