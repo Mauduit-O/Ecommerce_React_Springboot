@@ -13,7 +13,6 @@ export default function Home() {
       baseURL: 'http://localhost:8082',
     })
     .then((response) => {
-      console.log(response)
       setData(response.data)
     })
     .catch((err) => {

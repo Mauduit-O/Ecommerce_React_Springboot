@@ -21,7 +21,8 @@ export const ContainerHeader = styles.div`
 export const ContainerAppBar = styled('div')(({ theme }) => ({
   '.container-header': {
     background: 'white',
-    position: 'fixed'
+    position: 'fixed',
+    zIndex: 2
   }
 }));
 

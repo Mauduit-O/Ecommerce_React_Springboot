@@ -11,7 +11,7 @@ import axios from 'axios';
 import Search from './pages/search/Search';
 
 // Nom de la clé ou on va stocké notre token dans le localStorage
-export const AUTH_TOKEN_KEY = 'jhiauthenticationToken';
+export const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
 
 function App() {
 
@@ -27,16 +27,14 @@ function App() {
     timeout: 20000 // request timeout
   });
   
-
   useEffect(() => {
     axios.interceptors.request.use(function (request: any) {
       const token = sessionStorage.getItem(AUTH_TOKEN_KEY)
-      if (token) {       
-        // request.headers.Authorization = `Bearer ${token}`;
-        request.headers["Authorization"] = `Bearer ${token}`;
+      
+      if (token) {   
+        request.headers.Authorization = `Bearer ${token}`;
       }
       setLoading(true)
-      console.log(request);
       return request
       
     }, (error) => {

@@ -31,7 +31,7 @@ public class JwtController {
     AuthenticationManagerBuilder authenticationManagerBuilder;
 	
 	 @PostMapping("/authenticate")
-	 public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest jwtRequest, HttpServletResponse response) {
+	 public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest jwtRequest) {
 		 
 		 Authentication authentication = logUser(jwtRequest.getEmail(), jwtRequest.getPassword());
 		 String jwt = jwtUtils.generateToken(authentication);
@@ -41,7 +41,10 @@ public class JwtController {
 	     System.out.println(principal);
 	     System.out.println(httpHeaders);
 	     System.out.println(jwt);
+//	     return new ResponseEntity<>(new JwtResponse(((User) principal).getUsername()), httpHeaders, HttpStatus.OK);
 	     return new ResponseEntity<>(new JwtResponse(((User) principal).getUsername()), httpHeaders, HttpStatus.OK);
+	     
+	     
 	     
 	     
 		 

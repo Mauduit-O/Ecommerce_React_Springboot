@@ -9,7 +9,7 @@ export const BtnForm = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2% 4%;
+  // margin: 2% 4%;
   position: relative;
   overflow: hidden;	
 
